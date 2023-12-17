@@ -1,0 +1,131 @@
+<!-- Remarque 
+il faut import ng module in app-mdulo .ts
+ aussi il faut declare hdouma fy ts mt3 
+ compment phone: string = ''; 
+  checkPassword: string = '';
+  password: string = '';  -->
+   
+  <div class="container">
+    <div class=" col-md-5 offset-md-1">
+      <form form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+          <h3>Register</h3>
+  
+<div  class="form-row">
+  <div class="col-md-6">
+  <label for="lastName">First Name</label>
+  <input type="text" class="form-control"  name="FirstName" ngModel required #FirstName="ngModel">
+  <div *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)" class="text-danger">
+    <div *ngIf="FirstName.errors?.['required']">
+      Last Name is required.
+    </div>
+    <!-- name="FirstName" esmm champs ely bch tab3tt fih donne
+    ngModel stockage de doone fi champs firste name (directev par angular)
+    required validation mt3 html
+    #FirstName="ngModel" une référence locale m3nha zy code par wela id n3rfou bih esmm champs locale 
+    FirstName.invalid thebett men champ  Vérifie si le champ est invalide
+    (FirstName.dirty || FirstName.touched)  dirty thabett mnh modifie w touched lemsa utilisateur wela le
+    *ngIf="FirstName.errors?.['required']" (directev mta3 angular) n3mlou bih conditon al li ntrieur mt3 balise
+    FirstName.errors?.['required'] (tabett est ce que fama eureurr wela shih par exmple hnya bch tabet champ m3bya wela far8a)
+    Last Name is required.  hnya require 5dett true m3nha fama faute alors message haka bch ydhorr -->
+
+  </div>
+</div>
+<div class="col-md-6">
+  <label for="lastName">Last Name</label>
+  <input type="text" class="form-control" id="lastName" name="lastName" ngModel required #lastName="ngModel">
+  <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">
+    <div *ngIf="lastName.errors?.['required']">
+      Last Name is required.
+    </div>
+  </div>
+</div>
+  
+</div>
+
+<div class="form-group">
+  
+  <label for="email">Email</label>
+  <input type="email" class="form-control" id="email" name="email" ngModel required #email="ngModel" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$">
+  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+    <div *ngIf="email.errors?.['required']">
+      Email is required.
+    </div>
+    <div *ngIf="email.errors?.['pattern']">
+      Please enter a valid Gmail address.
+    </div>
+    <!-- pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"> :
+       pattern tb3a hchtmlll t3ml validation lle email
+    /^[a-zA-Z0-9._%+-] ^ haki lezmha oubligatoirment mawjuda bch nbdou biha chenn  [a-zA-Z0-9._%+-] hdouma 
+    le smbole elly njmou ykn mawjoudin 9bla @gmail.com
+    +@gmail\.com$" syntax heda m3nha rhom obligatoirment ykounou mawjoudin -->
+  </div>
+</div>
+
+         
+
+
+<div class="mb-3">
+  <label for="phone" class="form-label mb-0">Phone</label>
+  <input 
+    type="text" 
+    class="form-control" 
+    id="phone" 
+    [(ngModel)]="phone" 
+    name="phone"
+    required
+    pattern="[0-9]{8}"
+    (input)="validatePhone($event)" >
+  <div *ngIf="phone.length !== 8">
+    Phone must have exactly 8 digits.
+  </div>
+
+
+
+  <!-- [(ngModel)]="phone": two-way data binding ta9ra automatice numero mn3and user
+  #phoneInput: refrence locale hkitt aliha fi firstname 
+phoneInput.value verifi ken ytilisateur ktab haja && phoneInput.value.length !== 8" tverifi hja haki >8 wela <8 
+----------------code ts y5lih ya9blle kn umero moush les lettre------------------------------------
+  validatePhone(event: Event) {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, ''); // Remplace tous les caractères qui ne sont pas des chiffres par une chaîne vide
+  }
+  const input = event.target as HTMLInputElement;récupère l'élément HTML déclencheur de l'événement
+   (c'est-à-dire l'élément qui a déclenché l'événement).
+   input.value = input.value.replace(/[^0-9]/g, '');type mt3 donne ely ta9balhome
+/g obligatoirment nhoutouha 5ter haki t5li lcondition tkoun globale blou8a awda7 ba3d 1 mnjmouch nhtou f w ba3d 2 mnjmouch
+nhtou k condtion tkoun obligatoir
+-->
+</div>
+
+
+
+
+
+<div class="mb-3">
+  <label for="exampleInputEmail5" class="form-label mb-0">Password</label>
+  <input type="password" class="form-control" [(ngModel)]="password" name="password" required>
+  <div *ngIf="password && password.length < 10" class="text-danger">
+    Password must be at least 10 characters long.
+  </div>
+</div>
+
+
+
+<div class="mb-3">
+  <label for="exampleInputCheckPassword" class="form-label mb-0">Check Password</label>
+  <input type="password" class="form-control" [(ngModel)]="checkPassword" name="checkPassword" required>
+  <div *ngIf="checkPassword !== password" class="text-danger">
+    Passwords do not match.
+  </div>
+</div>
+
+
+<div class="d-grid">
+  <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid || checkPassword !== password">Submit</button>
+</div>
+
+
+      </form>
+  
+  </div>
+  </div>

@@ -1,0 +1,34 @@
+section.vh-100 {
+    background-color: bisque;
+  }
+  
+
+img.img-fluid {
+  
+  padding: 50px;
+}
+/* Define styles for desktop, tablet, and mobile breakpoints */
+
+@media screen and (min-width: 768px) {
+  /* Desktop styles */
+  .my-element {
+    width: 50%;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 481px) {
+  /* Tablet styles */
+  .my-element {
+    width: 75%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Mobile styles */
+  .my-element {
+    width: 100%;
+    font-size: 12px;
+  }
+}
