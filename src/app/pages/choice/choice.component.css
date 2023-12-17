@@ -1,0 +1,50 @@
+:root {
+  --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) ;
+}
+
+body {
+  background-color: #EFEAE4 ;
+}
+
+.card {
+  background-color: antiquewhite;
+  border: 1px solid #dd2476;
+  color: rgba(7, 7, 7, 0.8);
+  margin-bottom: 2rem;
+}
+
+
+
+.btn:hover, .btn:focus {
+      background: var(--gradient) !important;
+  
+  -webkit-text-fill-color: #fff !important;
+  border: 5px solid #fff !important; 
+  box-shadow: #e5e1e1  0 ;
+  text-decoration: underline;
+}
+/* Define styles for desktop, tablet, and mobile breakpoints */
+
+@media screen and (min-width: 768px) {
+  /* Desktop styles */
+  .my-element {
+    width: 50%;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 481px) {
+  /* Tablet styles */
+  .my-element {
+    width: 75%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Mobile styles */
+  .my-element {
+    width: 100%;
+    font-size: 12px;
+  }
+}
