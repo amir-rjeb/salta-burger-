@@ -1,0 +1,30 @@
+    def _verify_file_existence(self, df, result_column_name):
+        column_name = "Nom FMD disponible"
+
+        def check_file_existence(x):
+            if pd.isnull(x) or x == "":
+                return "Pas FMD Associé"
+            elif os.path.exists(os.path.join(self.folder_path, str(x))):
+                return "FMD Trouvable"
+            else:
+                return "FMD introuvable"
+
+        df[result_column_name] = df[column_name].apply(check_file_existence)
+        return df
+
+    def _add_hyperlinks(self, df, column_name):
+        for index, row in df.iterrows():
+            if isinstance(row[column_name], str) and row[column_name].strip():
+                file_path = os.path.join(self.folder_path, row[column_name])
+                hyperlink = f'=HYPERLINK("{file_path}", "{row[column_name]}")'
+                df.at[index, column_name] = hyperlink
+            else:
+                df.at[index, column_name] = ""
+
+        return df
+
+    def process_excel(self):
+        df = pd.read_excel(self.excel_file_path, sheet_name='BDD_FMD')
+        df = self._verify_file_existence(df, "Etat FMD")    
+        df = self._add_hyperlinks(df, 'Nom FMD disponible')
+        df.to_excel(self.output_excel_path, sheet_name='BDD_FMD', index=False)
